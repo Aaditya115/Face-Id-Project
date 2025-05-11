@@ -7,12 +7,12 @@ from numpy.linalg import norm
 # Initialize MTCNN face detector
 detector = MTCNN()
 
-# Load Aaditya's image and create its embedding (ensure this is correct)
-aaditya_image = cv2.imread("aaditya.jpg")  # Replace with the path to your image
-aaditya_image_rgb = cv2.cvtColor(aaditya_image, cv2.COLOR_BGR2RGB)
+# Load refrence image and create its embedding (ensure this is correct)
+ref_image = cv2.imread("img.jpg")  # Replace with the path to your image
+ref_image_rgb = cv2.cvtColor(ref_image, cv2.COLOR_BGR2RGB)
 
 # Get Aaditya's embedding using DeepFace (Ensure this works)
-aaditya_embedding = DeepFace.represent(aaditya_image_rgb, model_name="Facenet")[0]["embedding"]
+ref_embedding = DeepFace.represent(ref_image_rgb, model_name="Facenet")[0]["embedding"]
 
 # Function to calculate Cosine Similarity
 def cosine_similarity(embedding1, embedding2):
@@ -96,7 +96,7 @@ else:
                         # Check validity based on similarity threshold (85%)
                         if similarity_percentage > 85:
                             print(f"Valid for frame {i + 1}")  # Similarity higher than 85% means "Valid"
-                            name = f"Aaditya ({similarity_percentage:.2f}%)"
+                            name = f"ref ({similarity_percentage:.2f}%)"
                         else:
                             print(f"Invalid for frame {i + 1}")  # Similarity lower than 85% means "Invalid"
                             name = f"Unknown ({similarity_percentage:.2f}%)"
